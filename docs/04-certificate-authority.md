@@ -20,6 +20,7 @@ Generate the CA configuration file, certificate, and private key:
 
 ```bash
 {
+  sed -i "s/^DNS.5 = server.kubernetes.local$/DNS.5 = $(ssh root@server hostname --fqdn)/" ca.conf
   openssl genrsa -out ca.key 4096
   openssl req -x509 -new -sha512 -noenc \
     -key ca.key -days 3653 \
